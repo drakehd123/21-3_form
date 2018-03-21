@@ -1,0 +1,45 @@
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.animal">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</div> -->
+
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="FrContac">
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="name" type="text">
+    </mat-form-field>
+    <div class="alert alert-danger" role="alert" *ngIf="FrContac.get('name')?.errors?.required && FrContac.get('name')?.touched">
+     <strong>nhap vao name !</strong></div>
+
+      <mat-form-field>
+        <input matInput placeholder="Mail" formControlName="mail" type="email">
+      </mat-form-field>
+      <div class="alert alert-warning" role="alert" *ngIf="FrContac.get('mail')?.errors?.required && FrContac.get('mail')?.touched">
+        <strong>nhap vao email !</strong>
+      </div>
+      <div formGroupName="mGroup" class="example-container">
+        <mat-form-field>
+          <input matInput placeholder="Password" formControlName="password">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="confirm pass" formControlName="cfPassword">
+        </mat-form-field>
+      </div>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-raised-button color="warn" (click)="onNoClick()">No Thanks</button>
+      <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+      <button mat-raised-button color="accent" type="submit" [disabled]="FrContac.invalid">Accent</button>
+    </div>
+</form>
+
+<p>thong tin</p>
+<pre>{{ FrContac.value | json}}</pre>
+<pre>{{ FrContac.controls.name?.errors | json}}</pre>
